@@ -20,7 +20,7 @@ clean_git_folders() {
 # Function to enable git rerere
 enable_git_rerere() {
     echo "Enabling git rerere..."
-    git config --global rerere.enabled true
+    git config --local rerere.enabled true
 }
 
 # Function to create zeeree.json file if not exists
