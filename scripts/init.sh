@@ -53,20 +53,14 @@ create_zeeree_json() {
     fi
 }
 
-# Function to create zeeree.lock file if not exists
-create_zeeree_lock() {
-    echo "Creating zeeree.lock file if not exists..."
-    touch zeeree.lock
-}
-
 # Function to replace hooks into .git/hooks folder
 replace_hooks() {
     echo "Replacing hooks into .git/hooks folder..."
     cp hooks/* .git/hooks/
 }
 
+# Function to refresh zeeree.lock file
 refresh_lock() {
-    echo "Refreshing..."
     chmod +x ./scripts/refresh.sh
     ./scripts/refresh.sh
 }
@@ -77,7 +71,6 @@ download_commands
 clean_git_folders
 enable_git_rerere
 create_zeeree_json
-create_zeeree_lock
 replace_hooks
 refresh_lock
 
