@@ -20,10 +20,8 @@ install_dependencies() {
 # Function to clean .git/rr-cache & .git/hooks folders
 clean_git_folders() {
     echo "Cleaning folders..."
-    rm -rf .git/rr-cache
-    mkdir .git/rr-cache
-    rm -rf .git/hooks
-    mkdir .git/hooks
+    mkdir -p .git/rr-cache
+    mkdir -p .git/hooks
 }
 
 # Function to enable git rerere
