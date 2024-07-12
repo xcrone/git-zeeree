@@ -11,10 +11,10 @@ check_git_repository() {
     fi
 }
 
-# Function to download required commands if needed
-download_commands() {
-    echo "Downloading required commands..."
-    # Add your commands to download dependencies here
+# Function to download required dependencies if needed
+install_dependencies() {
+    echo "Install required dependencies..."
+    # install
 }
 
 # Function to clean .git/rr-cache & .git/hooks folders
@@ -67,7 +67,7 @@ refresh_lock() {
 
 # Main script execution
 check_git_repository
-download_commands
+install_dependencies
 clean_git_folders
 enable_git_rerere
 create_zeeree_json
