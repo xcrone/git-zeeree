@@ -11,19 +11,11 @@ check_git_repository() {
     fi
 }
 
-# Function to download required commands if needed
-download_commands() {
-    echo "Downloading required commands..."
-    # Add your commands to download dependencies here
-}
-
 # Function to clean .git/rr-cache & .git/hooks folders
 clean_git_folders() {
     echo "Cleaning folders..."
-    rm -rf .git/rr-cache
-    mkdir .git/rr-cache
-    rm -rf .git/hooks
-    mkdir .git/hooks
+    mkdir -p .git/rr-cache
+    mkdir -p .git/hooks
 }
 
 # Function to enable git rerere
@@ -35,43 +27,37 @@ enable_git_rerere() {
 # Function to create zeeree.json file if not exists
 create_zeeree_json() {
     echo "Creating zeeree.json file if not exists..."
-    if [ ! -f zeeree.json ]; then
-        # Define your variable here
-        key_value="your_key_value_here"
-
-        # Create zeeree.json with proper formatting
-        echo '{
-    "version": "'"$VERSION"'",
-    "enable": true,
-    "key": "'"$KEY"'",
-    "days_limit": {
-        "enable": true,
-        "unresolve": 30,
-        "resolve": 30
-    }
-}' > zeeree.json
+    if [ ! -f ./zeeree.json ]; then
+        cp ./config/zeeree.json .
     fi
 }
 
 # Function to replace hooks into .git/hooks folder
 replace_hooks() {
     echo "Replacing hooks into .git/hooks folder..."
-    cp hooks/* .git/hooks/
+    cp ./hooks/post-merge ./.git/hooks/
+    cp ./hooks/post-rebase ./.git/hooks/
+}
+
+set_hooks_executable() {
+    echo "Grant execute permission to hooks..."
+    chmod +x ./.git/hooks/post-merge
+    chmod +x ./.git/hooks/post-rebase
 }
 
 # Function to refresh zeeree.lock file
 refresh_lock() {
-    chmod +x ./scripts/refresh.sh
-    ./scripts/refresh.sh
+    chmod +x ./scripts/after-resolve.sh
+    zeeree refresh
 }
 
 # Main script execution
 check_git_repository
-download_commands
 clean_git_folders
 enable_git_rerere
 create_zeeree_json
 replace_hooks
+set_hooks_executable
 refresh_lock
 
 echo "Setup completed."

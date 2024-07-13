@@ -1,0 +1,9 @@
+{
+    "version": "1.0.0",
+    "enable": true,
+    "days_limit": {
+        "enable": true,
+        "unresolve": 30,
+        "resolve": 30
+    }
+}
