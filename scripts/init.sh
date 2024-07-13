@@ -1,7 +1,6 @@
 #!/bin/bash
 
-VERSION="1.0.0"
-KEY="eGNyb25lL2dpdC16ZWVyZWU"
+LIB_DIR="/usr/local/lib/xcrone/git-zeeree"
 
 # Function to check if inside Git repository
 check_git_repository() {
@@ -28,27 +27,21 @@ enable_git_rerere() {
 create_zeeree_json() {
     echo "Creating zeeree.json file if not exists..."
     if [ ! -f ./zeeree.json ]; then
-        cp ./config/zeeree.json .
+        cp $LIB_DIR/config/zeeree.json .
     fi
 }
 
 # Function to replace hooks into .git/hooks folder
 replace_hooks() {
     echo "Replacing hooks into .git/hooks folder..."
-    cp ./hooks/post-merge ./.git/hooks/
-    cp ./hooks/post-rebase ./.git/hooks/
+    cp $LIB_DIR/hooks/post-merge ./.git/hooks/
+    cp $LIB_DIR/hooks/post-rebase ./.git/hooks/
 }
 
 set_hooks_executable() {
     echo "Grant execute permission to hooks..."
     chmod +x ./.git/hooks/post-merge
     chmod +x ./.git/hooks/post-rebase
-}
-
-# Function to refresh zeeree.lock file
-refresh_lock() {
-    chmod +x ./scripts/after-resolve.sh
-    zeeree refresh
 }
 
 # Main script execution
@@ -58,7 +51,7 @@ enable_git_rerere
 create_zeeree_json
 replace_hooks
 set_hooks_executable
-refresh_lock
+zeeree refresh
 
 echo "Setup completed."
 
