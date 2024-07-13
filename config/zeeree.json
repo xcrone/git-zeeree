@@ -1,7 +1,6 @@
 {
     "version": "1.0.0",
     "enable": true,
-    "key": "eGNyb25lL2dpdC16ZWVyZWU",
     "days_limit": {
         "enable": true,
         "unresolve": 30,
