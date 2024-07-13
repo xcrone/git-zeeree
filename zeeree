@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# zeeree command script
+
+case "$1" in
+    init)
+        echo "Initializing zeeree..."
+        # Add your initialization code here
+        ;;
+    *)
+        echo "Usage: zeeree {init}"
+        exit 1
+        ;;
+esac
