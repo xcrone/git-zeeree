@@ -4,5 +4,5 @@
 # Check if there were conflicts
 if [ -f .git/MERGE_MSG ]; then
     echo "Conflicts resolved. Running post-merge hook."
-    zeeree after-resolve --push-commit 1
+    zeeree after-resolve --save-commit 1
 fi

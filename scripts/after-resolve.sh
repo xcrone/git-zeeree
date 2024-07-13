@@ -3,13 +3,13 @@
 LOCK_FILE="zeeree.lock"
 PARENT_DIR=".git/rr-cache"
 OUTPUT_DIR=".git/zeeree-temp"
-PUSH_COMMIT=false
+SAVE_COMMIT=false
 
 set_prompt_from_flag() {
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --push-commit)
-                PUSH_COMMIT=true
+            --save-commit)
+                SAVE_COMMIT=true
                 ;;
             *)
                 echo "Unknown parameter passed: $1"
@@ -62,7 +62,7 @@ set_lock_content() {
     echo -e $LOCK_CONTENT > $LOCK_FILE
 }
 
-push_commit_lock() {
+save_commit_lock() {
     CURRENT_DATE=$(date +"%Y%m%d%H%M%S")
     git add $LOCK_FILE
     git commit -m "New zeeree generated at $CURRENT_DATE"
@@ -77,7 +77,7 @@ set_prompt_from_flag
 create_temp
 generate_lock
 set_lock_content
-if $PUSH_COMMIT; then
-    push_commit_lock
+if $SAVE_COMMIT; then
+    save_commit_lock
 fi
 remove_temp
