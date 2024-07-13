@@ -7,7 +7,7 @@ case "$1" in
     init)
         /bin/bash -c "$($LIB_DIR/scripts/init.sh)"
         ;;
-    refresh)
+    after-resolve)
         /bin/bash -c "$($LIB_DIR/scripts/after-resolve.sh)"
         ;;
     *)

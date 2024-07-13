@@ -51,7 +51,7 @@ enable_git_rerere
 create_zeeree_json
 replace_hooks
 set_hooks_executable
-zeeree refresh
+zeeree after-resolve
 
 echo "Setup completed."
 

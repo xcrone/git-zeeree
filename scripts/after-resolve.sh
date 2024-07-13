@@ -3,6 +3,22 @@
 LOCK_FILE="zeeree.lock"
 PARENT_DIR=".git/rr-cache"
 OUTPUT_DIR=".git/zeeree-temp"
+PUSH_COMMIT=false
+
+set_prompt_from_flag() {
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            --push-commit)
+                PUSH_COMMIT=true
+                ;;
+            *)
+                echo "Unknown parameter passed: $1"
+                exit 1
+                ;;
+        esac
+        shift
+    done
+}
 
 create_temp() {
     mkdir -p $OUTPUT_DIR
@@ -52,10 +68,13 @@ remove_temp() {
 
 echo "Refreshing..."
 
+set_prompt_from_flag
 create_temp
 generate_lock
 set_lock_content
-push_commit_lock
+if $PUSH_COMMIT; then
+    push_commit_lock
+fi
 remove_temp
 
 echo "Refreshed."
