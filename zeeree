@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # zeeree command script
+LIB_DIR="/usr/local/lib/xcrone/git-zeeree"
 
 case "$1" in
     init)
-        ./scripts/init.sh
+        /bin/bash -c "$(./scripts/init.sh)"
         ;;
     refresh)
-        ./scripts/after-resolve.sh
+        /bin/bash -c "$(./scripts/after-resolve.sh)"
         ;;
     *)
         echo "Usage: zeeree {init}"
