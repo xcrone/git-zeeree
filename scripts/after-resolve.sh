@@ -8,13 +8,7 @@ SAVE_COMMIT=false
 set_prompt_from_flag() {
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --save-commit)
-                SAVE_COMMIT=true
-                ;;
-            *)
-                echo "Unknown parameter passed: $1"
-                exit 1
-                ;;
+            --save-commit) SAVE_COMMIT=true ;;
         esac
         shift
     done
@@ -66,14 +60,13 @@ save_commit_lock() {
     CURRENT_DATE=$(date +"%Y%m%d%H%M%S")
     git add $LOCK_FILE
     git commit -m "New zeeree generated at $CURRENT_DATE"
-    git push -f
 }
 
 remove_temp() {
     rm -rf $OUTPUT_DIR
 }
 
-set_prompt_from_flag
+set_prompt_from_flag "$@"
 create_temp
 generate_lock
 set_lock_content
