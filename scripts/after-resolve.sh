@@ -43,7 +43,7 @@ get_total_child_directory() {
 set_lock_content() {
     LOCK_CONTENT=$(cat $LOCK_FILE)
     TOTAL=$(get_total_child_directory)
-    echo "TOTAL: $TOTAL"
+    echo "Total merge conflict and resolve cache: $TOTAL"
     if [ "$TOTAL" -eq 0 ]; then
         return
     fi
@@ -73,8 +73,6 @@ remove_temp() {
     rm -rf $OUTPUT_DIR
 }
 
-echo "Refreshing..."
-
 set_prompt_from_flag
 create_temp
 generate_lock
@@ -83,5 +81,3 @@ if $PUSH_COMMIT; then
     push_commit_lock
 fi
 remove_temp
-
-echo "Refreshed."
