@@ -6,7 +6,7 @@ LIB_DIR="/usr/local/lib/xcrone/git-zeeree"
 REPO="https://github.com/xcrone/git-zeeree.git"
 
 run_command() {
-    if ! sudo $1 > /dev/null 2>&1; then
+    if ! sudo "$@" > /dev/null 2>&1; then
         echo "Error: Failed to execute $1" >&2
         exit 1
     fi

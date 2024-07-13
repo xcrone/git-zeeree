@@ -4,8 +4,10 @@
 
 case "$1" in
     init)
-        echo "Initializing zeeree..."
-        # Add your initialization code here
+        ./scripts/init.sh
+        ;;
+    refresh)
+        ./scripts/after-resolve.sh
         ;;
     *)
         echo "Usage: zeeree {init}"
