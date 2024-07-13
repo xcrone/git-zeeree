@@ -31,7 +31,11 @@ generate_lock() {
 
 get_total_child_directory() {
     DIRECTORIES=$(find "$PARENT_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
-    TOTAL=$(echo "$DIRECTORIES" | wc -l)
+    if [ -z "$DIRECTORIES" ]; then
+        TOTAL=0
+    else
+        TOTAL=$(echo "$DIRECTORIES" | wc -l)
+    fi
 
     echo $TOTAL
 }
@@ -39,8 +43,11 @@ get_total_child_directory() {
 set_lock_content() {
     LOCK_CONTENT=$(cat $LOCK_FILE)
     TOTAL=$(get_total_child_directory)
-    INDEX=0
     echo "TOTAL: $TOTAL"
+    if [ "$TOTAL" -eq 0 ]; then
+        return
+    fi
+    INDEX=0
     for DIR in "$PARENT_DIR"/*/; do
         INDEX=$((INDEX + 1))
         DIR_NAME=$(basename "$DIR")

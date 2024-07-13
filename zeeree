@@ -5,13 +5,13 @@ LIB_DIR="/usr/local/lib/xcrone/git-zeeree"
 
 case "$1" in
     init)
-        /bin/bash -c "$($LIB_DIR/scripts/init.sh)"
+        /bin/bash -c $LIB_DIR/scripts/init.sh
         ;;
     after-resolve)
-        /bin/bash -c "$($LIB_DIR/scripts/after-resolve.sh)"
+        /bin/bash -c $LIB_DIR/scripts/after-resolve.sh
         ;;
     *)
-        echo "Usage: zeeree {init}"
+        echo "Usage: zeeree {init, after-resolve}"
         exit 1
         ;;
 esac
