@@ -46,7 +46,7 @@ set_lock_content() {
         INDEX=$((INDEX + 1))
         DIR_NAME=$(basename "$DIR")
         ZIP_FILENAME="${OUTPUT_DIR}/${DIR_NAME}.zip"
-        zip -r $ZIP_FILENAME $DIR -x "*.DS_Store"
+        zip -r $ZIP_FILENAME $DIR -x "*.DS_Store" > /dev/null 2>&1
         HASH=$(cat $ZIP_FILENAME | base64)
         LOCK_CONTENT="${LOCK_CONTENT}${DIR_NAME}:${HASH};"
         if [ "$INDEX" -lt "$TOTAL" ]; then
