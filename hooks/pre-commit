@@ -1,0 +1,3 @@
+#!/bin/sh
+
+zeeree after-resolve --save-commit 1
