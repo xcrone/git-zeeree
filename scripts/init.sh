@@ -34,14 +34,12 @@ create_zeeree_json() {
 # Function to replace hooks into .git/hooks folder
 replace_hooks() {
     echo "Replacing hooks into .git/hooks folder..."
-    cp $LIB_DIR/hooks/post-merge ./.git/hooks/
-    cp $LIB_DIR/hooks/post-rebase ./.git/hooks/
+    cp $LIB_DIR/hooks/pre-commit ./.git/hooks/
 }
 
 set_hooks_executable() {
     echo "Grant execute permission to hooks..."
-    chmod +x ./.git/hooks/post-merge
-    chmod +x ./.git/hooks/post-rebase
+    chmod +x ./.git/hooks/pre-commit
 }
 
 # Main script execution

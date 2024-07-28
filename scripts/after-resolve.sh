@@ -8,13 +8,7 @@ SAVE_COMMIT=false
 set_prompt_from_flag() {
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            --save-commit)
-                SAVE_COMMIT=true
-                ;;
-            *)
-                echo "Unknown parameter passed: $1"
-                exit 1
-                ;;
+            --save-commit) SAVE_COMMIT=true ;;
         esac
         shift
     done
@@ -52,7 +46,7 @@ set_lock_content() {
         INDEX=$((INDEX + 1))
         DIR_NAME=$(basename "$DIR")
         ZIP_FILENAME="${OUTPUT_DIR}/${DIR_NAME}.zip"
-        zip -r $ZIP_FILENAME $DIR -x "*.DS_Store"
+        zip -r $ZIP_FILENAME $DIR -x "*.DS_Store" > /dev/null 2>&1
         HASH=$(cat $ZIP_FILENAME | base64)
         LOCK_CONTENT="${LOCK_CONTENT}${DIR_NAME}:${HASH};"
         if [ "$INDEX" -lt "$TOTAL" ]; then
@@ -65,15 +59,14 @@ set_lock_content() {
 save_commit_lock() {
     CURRENT_DATE=$(date +"%Y%m%d%H%M%S")
     git add $LOCK_FILE
-    git commit -m "New zeeree generated at $CURRENT_DATE"
-    git push -f
+    git commit -m "Zeeree Generated at $CURRENT_DATE"
 }
 
 remove_temp() {
     rm -rf $OUTPUT_DIR
 }
 
-set_prompt_from_flag
+set_prompt_from_flag "$@"
 create_temp
 generate_lock
 set_lock_content
