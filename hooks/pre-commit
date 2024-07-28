@@ -1,3 +1,6 @@
 #!/bin/sh
 
-zeeree after-resolve --save-commit 1
+# Check if the last commit was a merge commit
+if git log -1 | grep -q "Merge"; then
+    zeeree after-resolve --save-commit 1
+fi

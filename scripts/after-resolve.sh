@@ -59,6 +59,7 @@ set_lock_content() {
 save_commit_lock() {
     CURRENT_DATE=$(date +"%Y%m%d%H%M%S")
     git add $LOCK_FILE
+    git commit -m "Zeeree Generated at $CURRENT_DATE"
 }
 
 remove_temp() {
